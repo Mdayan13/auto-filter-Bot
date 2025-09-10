@@ -10,7 +10,7 @@ Send `/start` to begin your movie journey!
 
 ### 2. **Search Movies**
 Simply type any movie name in the chat and the bot will:
-- 🔍 Search thrA powerful Telegram bot for searching and streaming movies with advanced features like AI-powered search, inline browsing, and premium options.ough our extensive movie database
+- 🔍 Search through our extensive movie database
 - 🤖 Use AI to find the best matches
 - 📋 Display results in an easy-to-browse format
 
