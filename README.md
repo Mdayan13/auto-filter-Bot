@@ -29,51 +29,12 @@ Simply type any movie name in the chat and the bot will:
 
 ## 🎯 Features
 
-### Core Features
-- **Smart Search**: AI-powered movie search
-- **Fast Results**: Quick response times
-- **Rich Media**: High-quality posters and descriptions
-- **Session Memory**: Remembers your search context
-- **Error Recovery**: Automatic retry on failures
 
 ### Premium Features
 - ⚡ **Faster Downloads**: Priority access
 - 🎯 **Advanced Filters**: Search by year, genre, language
 - 📊 **Usage Analytics**: Track your viewing habits
 - 🎪 **Exclusive Content**: Early access to new releases
-
-## 💡 How to Use
-
-### Basic Usage
-1. Start a chat with the bot
-2. Type any movie name (e.g., "Avengers", "Inception 2010")
-3. Browse the results using inline buttons
-4. Click on a movie to get download/stream options
-
-### Advanced Search Tips
-- **Exact Match**: "The Dark Knight 2008"
-- **Partial Match**: "Dark Knight"
-- **Language Specific**: Include language in search
-- **Year Specific**: Add year for better results
-
-### Button Guide
-- **⬅️ Prev**: Go to previous page
-- **Next ➡️**: Go to next page
-- **Download**: Get download links
-- **Stream**: Get streaming options
-- **Back**: Return to main menu
-
-## 🔧 Troubleshooting
-
-### Common Issues
-- **"No movies found"**: Try different keywords or check spelling
-- **Slow responses**: The bot is processing your request, please wait
-- **Buttons not working**: Try restarting the chat with `/start`
-
-### Need Help?
-- Use `/help` for basic commands
-- Contact bot owner for premium support
-- Check bot status and updates
 
 ## 📋 Commands
 
