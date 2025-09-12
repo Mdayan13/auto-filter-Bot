@@ -1,9 +1,9 @@
 import { Context } from "grammy";
 import { config } from "../config.js";
 import { bot } from "../index.js";
-import { Movie } from "../schemas/fileSchema.js";
+import { Movie } from "../db/fileSchema.js";
 import { isAllowDuplicate } from "./setting.js";
-import { sendMovieWithCaption, sendMovieWithCaption2 } from "../plugins/sendMoviDetails.js";
+import { sendMovieWithCaption2 } from "../plugins/sendMoviDetails.js";
 
 export const sendLog = async (message: string) => {
   console.log("sendlong log");
@@ -21,24 +21,22 @@ export const constNotfound = (chatID: number, messageId: string) => {
   bot.api.sendMessage(chatID, messageId);
 };
 
-export const deleteVidoes = async(fileIds: number[]) => {
-    if(isAllowDuplicate){
-        console.log("deleting videos");
-        await bot.api.deleteMessages(config.dbChannel, fileIds);
-    };
-}
-export const prefixName = (name: string)=> {
-return "📁 𝐅𝐢𝐥𝐞 𝐍𝐚𝐦𝐞: " + name
-}
+export const deleteVidoes = async (fileIds: number[]) => {
+  if (isAllowDuplicate) {
+    console.log("deleting videos");
+    await bot.api.deleteMessages(config.dbChannel, fileIds);
+  }
+};
+export const prefixName = (name: string, title?: string) => {
+  return `📁 𝐅𝐢𝐥𝐞: ${title ? title + " " : ""}${name}`;
+};
 
-
-export const sendMovie = async (ctx:Context, fileId: string) => {
-  if(!fileId) return;
-  const movieDetails= await Movie.findOne({ fileUniquId: fileId });
+export const sendMovie = async (ctx: Context, fileId: string) => {
+  if (!fileId) return;
+  const movieDetails = await Movie.findOne({ fileUniquId: fileId });
   if (!movieDetails) {
     sendLog(`one FileId Not found trying to find from fileId ${fileId}`);
     return;
   }
-  await sendMovieWithCaption2(ctx,movieDetails );
-  
+  await sendMovieWithCaption2(ctx, movieDetails);
 };

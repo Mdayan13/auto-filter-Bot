@@ -1,5 +1,33 @@
-import { InlineKeyboard } from "grammy";
-import { IMovie } from "../schemas/fileSchema";
+import { Context, InlineKeyboard } from "grammy";
+import { IMovie } from "../db/fileSchema";
+import { config } from "../config";
+
+export const botDetailsInfo = (
+  ᴀʟʟᴜsᴇʀs: number,
+  ᴘʀᴇᴍɪᴜᴍUSERS: number,
+  ᴀʟʟꜰɪʟᴇs: number,
+  getUptime: string
+) =>
+  `╭────[ 🗃 ᴅᴀᴛᴀʙᴀsᴇ 🗃 ]────⍟
+│
+├⋟ ᴀʟʟ ᴜsᴇʀs ⋟ ${ᴀʟʟᴜsᴇʀs}
+├⋟ ᴘʀᴇᴍɪᴜᴍ ᴜꜱᴇʀꜱ ⋟ ${ᴘʀᴇᴍɪᴜᴍUSERS}
+├⋟ ᴀʟʟ ꜰɪʟᴇs ⋟ ${ᴀʟʟꜰɪʟᴇs}
+│
+├────[ 💻 ᴠᴘs ᴅᴇᴛᴀɪʟs 💻 ]────⍟
+│
+├⋟ ᴜsᴇᴅ sᴛᴏʀᴀɢᴇ ⋟ 190.14 MB
+├⋟ ꜰʀᴇᴇ sᴛᴏʀᴀɢᴇ ⋟ 321.86 MB
+├⋟ ʀᴀᴍ ⋟ 60.1%
+├⋟ ᴄᴘᴜ ⋟ 46.8%
+│
+├────[ 🤖 ʙᴏᴛ ᴅᴇᴛᴀɪʟs 🤖 ]────⍟
+│
+├⋟ ᴜᴘᴛɪᴍᴇ ⋟ ${getUptime}
+├⋟ ᴅʙ ꜰɪʟᴇ'ꜱ ⋟ ${ᴀʟʟꜰɪʟᴇs}
+│
+╰─────────────────────⍟
+`;
 
 export const MovieCaption = (movie: IMovie) => {
   return `🍿  Movie Details
@@ -10,9 +38,14 @@ export const MovieCaption = (movie: IMovie) => {
     Array.isArray(movie.genre) ? movie.genre.join(", ") : movie.genre || "N/A"
   }
 🌐 Languages  : ${movie.languages?.length ? movie.languages.join(", ") : "N/A"}
+⚡uploaded By : https://t.me/Movie_Lord_Official
 📅 Year       : ${movie.year ?? "Unknown"}
 ⏳ Duration   : ${formatDuration(movie.duration)}
 📦 File Size  : ${convertToSize(movie.size)}`;
+};
+export const MovieCaptionV2 = (movie: IMovie) => {
+  return `📁FILENAME: @filterbort03111bot ${movie.fileName}\n\n
+  📦 File Size:  ${convertToSize(movie.size)}`;
 };
 const convertToSize = (size: number) => {
   if (!size) return "N/A";
@@ -41,17 +74,17 @@ const formatDuration = (seconds?: number) => {
     .join(":");
 };
 
-export const WelcomeCaption = `
-🍿 Welcome to MovieVerse Bot!
+export const WelcomeCaption = (ctx: Context) => {
+  return `
+🍿 Welcome, ${ctx.from?.first_name}!
 ━━━━━━━━━━━━━
-🎬 Search any movie
-⬇️ Instant results
-▶️ Stream on the go
-📥 Fast downloads
-🔍 Clean interface
-⚡ Super quick speed
-✨ 100% Free & Easy
+🎬 Search movies instantly
+▶️ Stream or download fast
+🔍 Simple & clean interface
+📂 GitHub: github.com/Mdayan13  
+⚡ Turning coffee & ideas → into code & magic.
 `;
+};
 
 export const OwnerCaption = `👨‍💻 Developer Intro  
 ━━━━━━━━━━━━━  
@@ -107,7 +140,6 @@ export const visitInline = new InlineKeyboard();
 export const videoButtons = new InlineKeyboard();
 export const premiumInline = new InlineKeyboard();
 export const autoForwardBot = new InlineKeyboard();
-
 // Visit Inline
 visitInline.text("Back", "BackToProfile").row();
 
@@ -119,7 +151,7 @@ inlineButtonForWelcome
 
 inlineButtonForWelcome
   .text("Premium", "premium")
-  .text("Group", "joinGroup")
+  .url("Group", "https://t.me/+lODYBa0UJpExNTQ9")
   .row();
 
 // Premium Inline
@@ -135,11 +167,23 @@ premiumInline.text("Back To Center", "BackToProfile").row();
 autoForwardBot.text("Back To Center", "BackToProfile").row();
 autoForwardBot.url("Coming Soon", "@perryperry_bot").row();
 
-videoButtons.text("Download", "Download").text("stream", "stream").row();
+videoButtons
+  .url("supportGroup", `${config.supportGroup}`)
+  .url("Request Channel", `${config.requestChannel}`)
+  .row();
+videoButtons.url("Bot Develepor", `${config.botOwner}`).row();
+videoButtons.text("Download / Stream", "dowloadAndStream").row();
+videoButtons
+  .text("🌍 languages", "Languages")
+  .text("SE0 - EPI", "episods")
+  .row();
+videoButtons.text(" 🎥 Quality", "Quality").text("📅 year", "year").row();
 // videoButtons.text("Back to list", "backTpList").row();
 // Bio Image URI
 export let BioImageUri =
   "AgACAgUAAxkBAAIBa2jAEzX4XpPKw85UGMmtI7tf-v7fAALhyDEbEvEBVu4_t0y4rG1-AQADAgADcwADNgQ";
 
 // Movie Inline
-
+export const botHelp = `
+/details:-  for details of bot
+/skipDuplcate:- for turning of the catch for duplicates in db`;

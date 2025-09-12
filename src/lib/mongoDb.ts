@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { mongoURI } from "..";
 import { sendLog } from "../utils/sendLogs";
+import { searchIndexex } from "../db/searchIndex";
 
 export const connectDb = async (retryCount = 0) => {
   try {
@@ -16,6 +17,7 @@ export const connectDb = async (retryCount = 0) => {
     });
     console.log("✅ MongoDB connected");
     await sendLog("✅ MongoDB connected");
+    await searchIndexex()
   } catch (error: any) {
     console.error("❌ MongoDB connection failed", error);
     sendLog(`🚨 MongoDB connection failed: ${error.message}`);

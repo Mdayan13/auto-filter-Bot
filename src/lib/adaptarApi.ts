@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { Agent } from "https";
 
 export const axiosAdapter = async (method: string, payload: any, token: string) => {
-  console.log("Calling Telegram API with method:", method, "and payload:");
+  console.log("Telegram with method:", method);
 
   const url = `https://api.telegram.org/bot${token}/${method}`;
   const httpsAgent = new Agent({ keepAlive: true, family: 4 });

@@ -1,15 +1,15 @@
-import { setEnvironmentData } from "worker_threads";
-import { Movie } from "../schemas/fileSchema.js";
+import { Movie } from "./fileSchema.js";
 import { Message } from "grammy/types";
 import {
   AiFileTitleAndGenre,
+  extractMovieQuality,
   getLanguages,
   getThubnailUrl,
   getYear,
+  seriesAndEpisodesIdentifier,
 } from "../utils/extracting.js";
 import { sendLog } from "../utils/sendLogs.js";
 import { Video } from "grammy/types";
-import mongoose from "mongoose";
 export type insertResult =
   | { status: "failed" }
   | { status: "duplicate"; messageId: number }
@@ -48,17 +48,24 @@ export const insertInDb = async (msg: Message, video: Video) => {
     const languages = (await getLanguages(video.file_name)) || [];
     const year = (await getYear(video.file_name)) || null;
     const duration = video.duration;
-
+    const quality = extractMovieQuality(video.file_name);
+    const { isSeries, seriesNo, episodeNo } = await seriesAndEpisodesIdentifier(
+      video.file_name
+    );
     const movieSaved = await Movie.create({
+      isSeries: isSeries,
+      episode: episodeNo,
       fileId: video.file_id,
       duration,
       fileUniquId: video.file_unique_id,
       fileName: newTitle2,
       size: video.file_size || 0,
+      quality,
       genre: genres,
       thumbnail: video.thumbnail?.file_id || null,
       thumbnailUrl,
       languages,
+      season: seriesNo,
       year,
     });
     if (!movieSaved) {
@@ -87,3 +94,9 @@ export const sendInsertResult = (
   sendLog(`
     total Movie Sent:-${total}\nmovie Saved To Db:- ${saved}\nduplicated Skipped:-${duplicated}\nfailed Movie:-${failed}`);
 };
+export const totalDocumentInDb = async() => {
+  const count = await Movie.countDocuments();
+  console.log("returinnng the documtes", count.toFixed)
+
+  return count
+}
