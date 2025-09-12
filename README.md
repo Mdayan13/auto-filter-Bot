@@ -7,6 +7,8 @@ markdown
 
 ### 1. **Start the Bot**
 Send `/start` to begin your movie journey!
+send `/details` to get the underhood details about bot!
+Send `/skipDuplicate` to disable/enable the skip feature about movies in db!
 
 ### 2. **Search Movies**
 Simply type any movie name in the chat and the bot will:
