@@ -31,7 +31,7 @@ export const mongoURI = process.env.MONGO_URI;
 export const bot = new Bot<Context & Api<RawApi> & SessionFlavor<SessionData>>(
   config.token
 );
-
+// this bot run using telegram pollingmethos  so web hook is closed other wise webhook is better 
 // app.post(`/bot${config.token}`, async (req, res) => {
 //   const timeout = setTimeout(() => {
 //     console.error("⏰ Webhook timeout");
