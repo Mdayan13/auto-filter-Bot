@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="https://pbs.twimg.com/media/G1IaWruXoAEH92I?format=jpg&name=large" alt="Movie Bot Screenshot 1" width="300" />
+  <br/><br/>
+  <img src="https://pbs.twimg.com/media/G1IaWthWAAEmkUS?format=jpg&name=large" alt="Movie Bot Screenshot 2" width="300" />
+</div>
+
 markdown
 # 🎬 Telegram Movie Bot
 
